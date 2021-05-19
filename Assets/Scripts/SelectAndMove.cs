@@ -27,6 +27,9 @@ public class SelectAndMove : MonoBehaviour
     {
         arRaycastmanager = GetComponent<ARRaycastManager>();
 
+        cube1.SetActive(true);
+        cube2.SetActive(true); 
+
     }
 
     // Update is called once per frame
