@@ -18,8 +18,8 @@ public class PlacementController : MonoBehaviour
     private ARRaycastManager arraycastManager;
     private bool placementPoseIsValid = false;
 
-    private float initialDistance;
-    private Vector3 initialScale;
+    //private float initialDistance;
+    //private Vector3 initialScale;
 
 
 
@@ -33,44 +33,44 @@ public class PlacementController : MonoBehaviour
     void Update()
     {
 
-
         if (spawnObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ARPlaceObject();
         }
 
-        if (Input.touchCount == 2)
-        {
-            var touchZero = Input.GetTouch(0);
-            var touchOne = Input.GetTouch(1);
+        //if (Input.touchCount == 2)
+        //{
+        //    var touchZero = Input.GetTouch(0);
+        //    var touchOne = Input.GetTouch(1);
 
-            if (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
-               touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
-            {
-                return;
-            }
+        //    if (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
+        //       touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
+        //    {
+        //        return;
+        //    }
 
-            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
-            {
-                initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                initialScale = spawnObject.transform.localScale;
-                Debug.Log("initial distance: " + initialDistance + "gameObject name: " + arObjectToSpawn.name);
-            }
+        //    if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+        //    {
+        //        initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
+        //        initialScale = spawnObject.transform.localScale;
+        //        Debug.Log("initial distance: " + initialDistance + "gameObject name: " + arObjectToSpawn.name);
+        //    }
 
-            else
-            {
-                var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+        //    else
+        //    {
+        //        var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
 
-                if (Mathf.Approximately(initialDistance, 0))
-                {
-                    return;
-                }
+        //        if (Mathf.Approximately(initialDistance, 0))
+        //        {
+        //            return;
+        //        }
 
-                var factor = currentDistance / initialDistance;
-                spawnObject.transform.localScale = initialScale * factor;
-            }
+        //        var factor = currentDistance / initialDistance;
+        //        spawnObject.transform.localScale = initialScale * factor;
+        //    }
 
-        }
+        //}
+
         UpdatePlacementPose();
         UpdatePlacementIndicator();
     }
