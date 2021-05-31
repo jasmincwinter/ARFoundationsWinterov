@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,9 @@ public class AIController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private bool isArrived;
+
+    private int score;
+    public TextMeshProUGUI scoreText;
 
     private enum EState
     {
@@ -27,6 +31,10 @@ public class AIController : MonoBehaviour
         animator = GetComponent<Animator>();
         navMeshAgent.enabled = false;
         isArrived = false;
+
+        score = 0;
+        scoreText.enabled = true;
+        SetScoreText();
     }
 
     private void Update()
@@ -67,5 +75,21 @@ public class AIController : MonoBehaviour
         navMeshAgent.enabled = false;
         animator.SetBool("IsRunning", false);
         transform.position = initialPosition;
+    }
+
+    private void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            other.gameObject.SetActive(false);
+            score = score + 1;
+
+            SetScoreText();
+        }
     }
 }
