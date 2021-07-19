@@ -18,6 +18,8 @@ public class PlacementController : MonoBehaviour
     private ARRaycastManager arraycastManager;
     private bool placementPoseIsValid = false;
 
+    private ARPlaneManager arPlaneManangerScript; 
+
     //private float initialDistance;
     //private Vector3 initialScale;
 
@@ -27,6 +29,9 @@ public class PlacementController : MonoBehaviour
     void Start()
     {
         arraycastManager = FindObjectOfType<ARRaycastManager>();
+
+        arPlaneManangerScript = GetComponent<ARPlaneManager>();
+
     }
 
     // Update is called once per frame
@@ -36,6 +41,7 @@ public class PlacementController : MonoBehaviour
         if (spawnObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ARPlaceObject();
+
         }
 
         //if (Input.touchCount == 2)
@@ -107,6 +113,7 @@ public class PlacementController : MonoBehaviour
     {
         spawnObject = Instantiate(arObjectToSpawn, PlacementPose.position, PlacementPose.rotation);
 
+        arPlaneManangerScript.enabled = false;
     }
 }
 

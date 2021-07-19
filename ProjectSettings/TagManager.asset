@@ -6,6 +6,9 @@ TagManager:
   tags:
   - cube
   - prize
+  - Coin
+  - start
+  - jump
   layers:
   - Default
   - TransparentFX
